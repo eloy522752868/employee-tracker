@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS employee_tracker;
+
 -- Create easy bay database --
 CREATE DATABASE employee_tracker;
 
@@ -8,7 +10,7 @@ USE  employee_tracker;
 CREATE TABLE department
 (
   -- Creates a numeric column called "id" which will automatically increment its default value as we create new rows --
-  id  INT PRIMARY KEY,
+  id  INT  NOT NULL AUTO_INCREMENT PRIMARY KEY
   -- Makes a string column called "name" which cannot contain null --
   name VARCHAR(30) NOT NULL
 )
@@ -16,7 +18,7 @@ CREATE TABLE department
 CREATE TABLE role
 (
   -- Creates a numeric column called "id" which will automatically increment its default value as we create new rows --
-  id  INT PRIMARY KEY,
+  id  INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
   -- Makes a string column called "item_name" which cannot contain null --
   title VARCHAR(30) NOT NULL,
   -- Makes a string column called "category" which cannot contain null --
@@ -28,7 +30,7 @@ CREATE TABLE role
 CREATE TABLE employee
 (
   -- Creates a numeric column called "id" which will automatically increment its default value as we create new rows --
-  id  INT PRIMARY KEY,
+  id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   -- Makes a string column called "item_name" which cannot contain null --
   first_name VARCHAR(30) NOT NULL,
   -- Makes a string column called "category" which cannot contain null --
