@@ -29,6 +29,7 @@ const runSearch = () => {
       choices: [
         'Add department',
         'Add role',
+        'Add an Employee',   
         'Exit',
       ],
     })
@@ -42,6 +43,10 @@ const runSearch = () => {
           addrole();
           //artistSearch();
           break;
+          case 'Add an Employee':
+            addemployee();
+            //artistSearch();
+            break;
         case 'Exit':
           connection.end();
           break;
@@ -72,25 +77,18 @@ const artistSearch = () => {
     });
 };
 
-const searchDeapartment = () => {
-  let department = [];
-      const query = 'SELECT id,name FROM employee_tracker.department';
-      connection.query(query,  "", (err, res) => {
-          res.forEach(({ id,name }) => {
-            department.push(name);
-            console.log(
-              `id: ${id},Song: ${name}`
-            );
-          });
-          console.log(department);
-  
-        return  department;
-      });
-};
-
-
 
 const addrole= () => {
+  const query = 'SELECT id,name FROM employee_tracker.department  ORDER BY name  ASC';
+  connection.query(query,  "", (err, res) => {
+    const dep = res.map((department) => {
+      return {
+        name: department.name,
+        value: department.id,
+      }
+    }); 
+
+
   inquirer
     .prompt([
     {
@@ -105,17 +103,79 @@ const addrole= () => {
     },
     
     {
-      name: 'action',
-      type: 'rawlist',
+      name: 'adddep',
+      type: 'list',
       message: 'What would you like to do?',
-      choices: searchDeapartment(),
+      choices: dep ,
     },
     ])
-    .then((answer) => {
-
-          console.log("Department as been added!");
+    .then((answer) => {  
+        const query = 'INSERT INTO role(title, salary,department_id) VALUES (?,?,?)';
+          connection.query(query, [answer.addtitle, answer.addsalary, answer.adddep], (err, res) => {
+           console.log("Role as been added!");
+          });
 
       });
+  });
+};
+
+
+const addemployee= () => {
+  const query1 = 'SELECT id,title FROM employee_tracker.role  ORDER BY name  ASC';
+  connection.query(query1,  "", (err, res) => {
+    const role = res.map((role) => {
+      return {
+        name: role.title,
+        value: role.id,
+      }
+    }); 
+
+    const query2 = 'SELECT id, first_name, last_name FROM employee_tracker.employee ORDER BY first_name  ASC';
+    connection.query(query2,  "", (err, res) => {
+      const emp = res.map((employee) => {
+        return {
+          name: employee.title,
+          value: employee.id,
+        }
+      }); 
+    }); 
+
+
+
+  inquirer
+    .prompt([
+    {
+      name: 'addfistname',
+      type: 'input',
+      message: 'Enter first name ?',
+    },
+    {
+      name: 'addlastname',
+      type: 'input',
+      message: 'Enter last name?',
+    },
+    
+    {
+      name: 'addrole',
+      type: 'list',
+      message: 'Enter Role?',
+      choices: role  ,
+    },
+    {
+      name: 'addemp',
+      type: 'list',
+      message: 'Enter Employee?',
+      choices: emp  ,
+    },
+    ])
+    .then((answer) => {  
+        const query = 'INSERT INTO employee(first_name, last_name,role_id,manager_id) VALUES (?,?,?,?)';
+          connection.query(query, [answer.first_name, answer.last_name, answer.role_id, answer.manager_id], (err, res) => {
+           console.log("Role as been added!");
+          });
+
+      });
+  });
 };
 
 const adddepartment= () => {
