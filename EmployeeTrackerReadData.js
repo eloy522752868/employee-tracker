@@ -100,7 +100,7 @@ const roleViewSearch = () => {
 //All employee Search
 const employeeViewSearch = () => {
   const query =
-    "SELECT e.id, CONCAT( e.first_name ,' ' , e.last_name) as employee , r.title, CONCAT(manager.first_name, ' ', manager.last_name)as manager FROM employee_tracker.employee e Left Join role r on e.id = r.id Left Join employee manager on e.id = manager.manager_id";
+    "SELECT e.id, CONCAT( e.first_name ,' ' , e.last_name) as employee , r.title, CONCAT(manager.first_name, ' ', manager.last_name)as manager FROM employee_tracker.employee e Left Join role r on e.id = r.id Left Join employee manager on e.manager_id = manager.id";
   console.log(" ");
   connection.query(query, "", (err, res) => {
     console.table(res);

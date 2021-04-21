@@ -13,4 +13,4 @@ Developers are often tasked with creating interfaces that make it easy for non-d
 
 Video link below:
 
-[Video Instructions](https://drive.google.com/file/d/1YbyhDjekcOnz4TaNOR-lGxG0GLOLqML_/view)
+[Video Instructions](https://drive.google.com/file/d/1Ue5AHOt1Z-hKyms1q5wCGq8baHyzJpSM/view)
