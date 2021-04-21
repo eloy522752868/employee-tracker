@@ -34,7 +34,6 @@ const runSearch = () => {
         "View all Departments",
         "View all Roles",
         "View all Employee",
-        "View employees by manager",
         "Update Employee Roles",
         "Update Employee Manager",
         "Exit",
@@ -142,6 +141,7 @@ const addrole = () => {
           (err, res) => {
             console.log(" ");
             console.log("Role as been added!");
+            console.log(" ");
             runSearch();
           }
         );
@@ -238,6 +238,7 @@ const updateEmployeeManger = () => {
           connection.query(query, "", (err, res) => {
             console.log(" ");
             console.log("Manager as been changes!");
+            console.log(" ");
             runSearch();
           });
         });
@@ -287,9 +288,9 @@ const addemployee = () => {
             choices: role,
           },
           {
-            name: "addemp",
+            name: "addmanager",
             type: "list",
-            message: "Enter Employee?",
+            message: "Enter Manager?",
             choices: emp,
           },
         ])
@@ -302,12 +303,13 @@ const addemployee = () => {
               answer.addfistname,
               answer.addlastname,
               answer.addrole,
-              answer.addemp,
+              answer.addmanager,
             ],
             (err, res) => {
               runSearch();
               console.log(" ");
               console.log("Employee as been added!");
+              console.log(" ");
             }
           );
         });
