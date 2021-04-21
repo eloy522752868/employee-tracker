@@ -1,13 +1,15 @@
+//modified by: Eloy Gonzalez
+//modified date: 04/20/2021
+//Include packages needed for this application
+//I was really was struggling a cold this week and really was able get this as much done as I wanted. Trying to add a much cold I can today. But normally I document much better.
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
 
 const connection = mysql.createConnection({
   host: "localhost",
-
   // Your port; if not 3306
   port: 3306,
-
   // Your username
   user: "root",
 
@@ -74,6 +76,8 @@ const runSearch = () => {
     });
 };
 
+//All department Search
+
 const departmentViewSearch = () => {
   const query = "SELECT id, name FROM department";
   console.log(" ");
@@ -83,6 +87,7 @@ const departmentViewSearch = () => {
   });
 };
 
+//All Role Search
 const roleViewSearch = () => {
   const query = "SELECT id , title, salary FROM role";
   console.log(" ");
@@ -92,6 +97,7 @@ const roleViewSearch = () => {
   });
 };
 
+//All employee Search
 const employeeViewSearch = () => {
   const query =
     "SELECT e.id, CONCAT( e.first_name ,' ' , e.last_name) as employee , r.title, CONCAT(manager.first_name, ' ', manager.last_name)as manager FROM employee_tracker.employee e Left Join role r on e.id = r.id Left Join employee manager on e.id = manager.manager_id";
@@ -102,6 +108,7 @@ const employeeViewSearch = () => {
   });
 };
 
+//add user role
 const addrole = () => {
   const query =
     "SELECT id,name FROM employee_tracker.department  ORDER BY name  ASC";
@@ -149,6 +156,7 @@ const addrole = () => {
   });
 };
 
+//update user role
 const updateEmployeeRole = () => {
   const query1 =
     "SELECT id,title FROM employee_tracker.role  ORDER BY title  ASC";
@@ -197,6 +205,7 @@ const updateEmployeeRole = () => {
   });
 };
 
+//update employee Manager 
 const updateEmployeeManger = () => {
   const query1 =
     "SELECT id, first_name, last_name FROM employee_tracker.employee ORDER BY first_name  ASC";
@@ -246,6 +255,7 @@ const updateEmployeeManger = () => {
   });
 };
 
+//add employee 
 const addemployee = () => {
   var emp2;
   const query1 =
@@ -317,6 +327,7 @@ const addemployee = () => {
   });
 };
 
+//add department
 const adddepartment = () => {
   inquirer
     .prompt({
